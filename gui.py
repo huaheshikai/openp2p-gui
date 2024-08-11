@@ -3,6 +3,7 @@ import install_openp2p
 import ctypes
 import installed
 import installed_openp2p
+import user_conf
 import sys
 
 
@@ -29,7 +30,7 @@ def option4():
 def show_menu():
     print("=== 菜单 ===")
     print("1. 开服")
-    print("2. 进服")
+    print("2. 联机")
     print("3. 设置")
     print("4. 关于")
     print("0. 退出")
@@ -42,6 +43,16 @@ if __name__ == "__main__":
         input("按任意键退出...")
         sys.exit()
     while True:
+        if user_conf.check_user_conf_exists():
+            user, passwd = user_conf.load_and_decrypt_user_data()
+        else:
+            while True:
+                user = input("请输入你的账号: ")
+                passwd = input("请输入你的密码: ")
+                login_successful_token, auth, token = login_try.login(user, passwd)
+                if login_successful_token:
+                    user_conf.save_encrypted_user_data(user, passwd)
+                    break
         show_menu()
         choice = input("请输入选项编号: ")
         if choice == "1":
@@ -49,7 +60,6 @@ if __name__ == "__main__":
                 installed_openp2p.config_openp2p()
             else:
                 node_name = input("请输入你的电脑名(六位英文以上可用-连接): ")
-                login_success, auth, token = login_try.login()
                 print("正在安装p2p")
                 install_openp2p.install_openp2p(node_name, token)
         elif choice == "2":

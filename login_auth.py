@@ -1,9 +1,9 @@
 import requests
 
 
-def login_to_auth(username, password):
+def login_to_auth(user, passwd):
     url = "https://console.openp2p.cn/api/v1/user/login"
-    payload = {"user": username, "password": password}
+    payload = {"user": user, "password": passwd}
 
     response = requests.post(url, json=payload)
 
@@ -15,4 +15,4 @@ def login_to_auth(username, password):
         if error_code == 0:  # 假设error_code为0表示登录成功
             return True, auth
         else:
-            return False, error_code
+            return False, None

@@ -16,4 +16,4 @@ def login_to_token(auth):
         if error_code == 0:  # 假设error_code为0表示登录成功
             return True, login_token
         else:
-            return False, error_code
+            return False, None
