@@ -45,6 +45,7 @@ if __name__ == "__main__":
     while True:
         if user_conf.check_user_conf_exists():
             user, passwd = user_conf.load_and_decrypt_user_data()
+            login_successful_token, auth, token = login_try.login(user, passwd)
         else:
             while True:
                 user = input("请输入你的账号: ")
