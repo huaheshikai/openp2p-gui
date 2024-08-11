@@ -3,8 +3,8 @@ import login_token
 
 
 def login():
-    username = "2813837083"
-    password = "xdC.fM8rWhQ2T"
+    username = input("请输入用户名：")
+    password = input("请输入密码：")
 
     try:
         # 使用 login_to_auth 进行认证
